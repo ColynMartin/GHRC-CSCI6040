@@ -91,3 +91,8 @@ CSV Results
 ## Notes
 
 This project uses a **scaled-down experimental design** so the full pipeline can run on a personal computer while still reproducing the core methodology of the original research study.
+
+Raw datasets are not included in this repository due to file size limits.  
+They can be downloaded from:
+- RealToxicityPrompts: Allen Institute for AI / Hugging Face
+- Anthropic Helpful-Harmless: Hugging Face
