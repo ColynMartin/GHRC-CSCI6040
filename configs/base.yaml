@@ -1,0 +1,22 @@
+model_name: "distilgpt2"
+dataset_file: "data/rtp_clean.csv"
+dataset: "RTP"
+n_samples: 5
+personality_conditions:
+  - "baseline"
+  - "high_agreeableness"
+  - "low_agreeableness"
+  - "high_honesty_humility"
+  - "low_honesty_humility"
+  - "high_emotionality"
+  - "low_emotionality"
+  - "high_extraversion"
+  - "low_extraversion"
+  - "high_openness"
+  - "low_openness"
+  - "high_conscientiousness"
+  - "low_conscientiousness"
+max_new_tokens: 50
+batch_size: 1
+seed: 42
+output_dir: "outputs"
