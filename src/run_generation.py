@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import torch
 import sys
 import yaml
 from transformers import pipeline
@@ -39,7 +40,14 @@ print(f"Running personality conditions: {personality_conditions}")
 # ---------------------------
 # Load model once
 # ---------------------------
-generator = pipeline("text-generation", model=model_name)
+device = 0 if torch.cuda.is_available() else -1
+
+if device == 0:
+    print("Using GPU for generation")
+else:
+    print("GPU not found, using CPU")
+
+generator = pipeline("text-generation", model=model_name, device=device)
 
 # ---------------------------
 # Run one condition at a time
