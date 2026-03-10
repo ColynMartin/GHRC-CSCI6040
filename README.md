@@ -12,19 +12,18 @@ Activate the environment:
 venv\Scripts\activate
 ```
 
-Run text generation:
+
+Run the full experiment pipeline:
 
 ```
-python src/run_generation.py
+python src/run_experiment.py
 ```
 
-Score toxicity:
+This command will:
 
-```
-python src/score_detoxify.py
-```
-
-Results will be saved in the `outputs/` folder.
+1. Generate model responses using personality prompts
+2. Score toxicity using Detoxify
+3. Save results to the `outputs/` folder
 
 ---
 
@@ -44,6 +43,7 @@ llm-personality-project
 │   └── personality_prompts.py
 │
 ├── src
+│   ├── run_experiment.py
 │   ├── run_generation.py
 │   └── score_detoxify.py
 │
