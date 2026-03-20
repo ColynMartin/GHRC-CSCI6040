@@ -5,15 +5,19 @@ import sys
 import yaml
 from transformers import pipeline
 
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+os.chdir(ROOT)
+
 # Add project root so Python can find prompts/
-sys.path.append(os.path.abspath("."))
+sys.path.append(ROOT)
 
 from prompts.personality_prompts import build_prompt
 
 # ---------------------------
 # Load config
 # ---------------------------
-with open("configs/base.yaml", "r") as file:
+config_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join("configs", "base.yaml")
+with open(config_path, "r") as file:
     config = yaml.safe_load(file)
 
 model_name = config["model_name"]

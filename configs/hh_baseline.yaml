@@ -1,0 +1,11 @@
+# HH-only run: baseline personality (helpfulness / integrity baseline before other conditions)
+model_name: "distilgpt2"
+dataset_file: "data/hh_clean.csv"
+dataset: "HH"
+n_samples: 50
+personality_conditions:
+  - "baseline"
+max_new_tokens: 50
+batch_size: 1
+seed: 42
+output_dir: "outputs"

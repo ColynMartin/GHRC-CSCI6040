@@ -1,13 +1,21 @@
-import pandas as pd
 import os
+
+import pandas as pd
 from detoxify import Detoxify
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+os.chdir(ROOT)
 
 model = Detoxify("original")
 
 output_dir = "outputs"
 
 for filename in os.listdir(output_dir):
-    if filename.endswith(".csv") and "detoxify" not in filename:
+    if (
+        filename.endswith(".csv")
+        and "detoxify" not in filename
+        and "_integrity" not in filename
+    ):
         input_path = os.path.join(output_dir, filename)
         output_path = os.path.join(output_dir, filename.replace(".csv", "_detoxify.csv"))
 
