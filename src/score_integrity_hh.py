@@ -80,23 +80,23 @@ def validate_integrity_metrics(df: pd.DataFrame) -> list[str]:
     return lines
 
 
-def main() -> None:
-    input_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join("outputs", "hh_baseline.csv")
+def process_integrity_csv(input_path: str, *, print_validation: bool = True) -> str:
+    """
+    Read raw HH generations, attach reference_reply and integrity columns, write *_integrity.csv.
+    Returns path to the written file.
+    """
     if not os.path.isfile(input_path):
-        print(f"Missing input file: {input_path}")
-        sys.exit(1)
+        raise FileNotFoundError(f"Missing input file: {input_path}")
 
     gen_df = pd.read_csv(input_path)
     if "prompt_id" not in gen_df.columns:
-        print("Expected column prompt_id in generation CSV")
-        sys.exit(1)
+        raise ValueError("Expected column prompt_id in generation CSV")
 
     hh = pd.read_csv(HH_CLEAN_PATH)
     if "reference_reply" not in hh.columns:
-        print(
-            "ERROR: hh_clean.csv must include reference_reply. Run: python src/clean_datasets.py"
+        raise ValueError(
+            "hh_clean.csv must include reference_reply. Run: python src/clean_datasets.py"
         )
-        sys.exit(1)
     ref_df = hh[["prompt_id", "reference_reply"]]
     merged = gen_df.merge(ref_df, on="prompt_id", how="left")
 
@@ -114,9 +114,21 @@ def main() -> None:
     merged.to_csv(out_path, index=False)
     print(f"Saved: {out_path}")
 
-    print("\n--- Metric validation ---")
-    for line in validate_integrity_metrics(merged):
-        print(line)
+    if print_validation:
+        print("\n--- Metric validation ---")
+        for line in validate_integrity_metrics(merged):
+            print(line)
+
+    return out_path
+
+
+def main() -> None:
+    input_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join("outputs", "hh_baseline.csv")
+    try:
+        process_integrity_csv(input_path, print_validation=True)
+    except (FileNotFoundError, ValueError) as e:
+        print(e)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

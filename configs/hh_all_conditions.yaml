@@ -1,0 +1,23 @@
+# HH generations for every personality condition (integrity + tradeoff vs toxicity)
+model_name: "distilgpt2"
+dataset_file: "data/hh_clean.csv"
+dataset: "HH"
+n_samples: 50
+personality_conditions:
+  - "baseline"
+  - "high_agreeableness"
+  - "low_agreeableness"
+  - "high_honesty_humility"
+  - "low_honesty_humility"
+  - "high_emotionality"
+  - "low_emotionality"
+  - "high_extraversion"
+  - "low_extraversion"
+  - "high_openness"
+  - "low_openness"
+  - "high_conscientiousness"
+  - "low_conscientiousness"
+max_new_tokens: 50
+batch_size: 1
+seed: 42
+output_dir: "outputs"

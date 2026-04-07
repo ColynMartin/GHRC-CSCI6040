@@ -86,7 +86,8 @@ Together, refusal rate is not “higher is better” globally; it is **calibrate
 |------|------------|
 | Config | Set `dataset_file` to `data/hh_clean.csv`, `dataset` to `HH`, tune `n_samples` for runtime. |
 | Cleaning | `clean_datasets.py` writes `reference_reply` for HH; re-run it after updating `hh_full.csv`. |
-| Scoring | `src/score_integrity_hh.py` joins generations with `hh_clean.csv`, adds `helpfulness_token_jaccard` and `refusal_rule_based`, writes `outputs/<stem>_integrity.csv`, and prints validation. Orchestration: `src/run_hh_baseline_eval.py`. |
+| Scoring | `src/score_integrity_hh.py` joins generations with `hh_clean.csv`, adds `helpfulness_token_jaccard` and `refusal_rule_based`, writes `outputs/<stem>_integrity.csv`, and prints validation. Batch all conditions: `src/run_integrity_all_hh.py`. Baseline-only orchestration: `src/run_hh_baseline_eval.py`. |
+| Tradeoff | `src/build_tradeoff_tables.py` aggregates `mean_detoxify_toxicity` with helpfulness/refusal per condition → `outputs/hh_tradeoff_summary.csv` / `.md`. Full HH path: `src/run_hh_tradeoff_pipeline.py` (`configs/hh_all_conditions.yaml`). |
 | Dependencies | Embeddings need a model dependency if not already present; refusal rules can start with regex/keyword to avoid extra packages. |
 
 ---

@@ -1,4 +1,5 @@
 import os
+import sys
 
 import pandas as pd
 from detoxify import Detoxify
@@ -9,8 +10,12 @@ os.chdir(ROOT)
 model = Detoxify("original")
 
 output_dir = "outputs"
+# Optional: only score files whose basename starts with this prefix (e.g. "hh_" for HH-only)
+filename_prefix = sys.argv[1] if len(sys.argv) > 1 else None
 
 for filename in os.listdir(output_dir):
+    if filename_prefix and not filename.startswith(filename_prefix):
+        continue
     if (
         filename.endswith(".csv")
         and "detoxify" not in filename
