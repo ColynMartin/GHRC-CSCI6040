@@ -66,6 +66,18 @@ One-shot (add `--generate` to include the slow generation step):
 python src/run_hh_tradeoff_pipeline.py --generate
 ```
 
+### HH: detox methods vs integrity + qualitative examples
+
+After per-condition `hh_*_integrity.csv` and `hh_*_detoxify.csv` exist, edit **`configs/detox_conditions.yaml`** (which personality runs count as “detox” vs `baseline`), then:
+
+```
+python src/analyze_detox_integrity.py
+```
+
+This writes **`outputs/detox_integrity_analysis.csv`** / **`.md`** (aggregate Δ helpfulness Jaccard, Δ toxicity, tradeoff vs win–win rates) and **`outputs/qualitative_examples.md`** (side-by-side prompts, reference, baseline vs condition generations). Interpretation notes: [`docs/detox_integrity_analysis_guide.md`](docs/detox_integrity_analysis_guide.md).
+
+Optional: `python src/run_hh_tradeoff_pipeline.py --analyze` runs only the analyzer (expects outputs already present).
+
 ⚠️ **Note:** All important experiment outputs should be uploaded to the shared OneDrive folder (see Data Storage section below).
 
 ---
@@ -77,6 +89,7 @@ llm-personality-project
 │
 ├── configs
 │   ├── base.yaml
+│   ├── detox_conditions.yaml
 │   ├── hh_all_conditions.yaml
 │   └── hh_baseline.yaml
 │
@@ -94,6 +107,7 @@ llm-personality-project
 │   ├── run_hh_tradeoff_pipeline.py
 │   ├── run_integrity_all_hh.py
 │   ├── build_tradeoff_tables.py
+│   ├── analyze_detox_integrity.py
 │   ├── score_detoxify.py
 │   └── score_integrity_hh.py
 │

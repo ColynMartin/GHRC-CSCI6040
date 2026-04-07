@@ -1,0 +1,17 @@
+# Conditions compared to baseline when analyzing "do detox-style prompts preserve integrity?"
+# Edit this list to match your team's hypotheses (e.g. HEXACO traits expected to reduce toxicity).
+baseline: baseline
+detox_methods:
+  - high_agreeableness
+  - high_honesty_humility
+  - low_agreeableness
+  - low_honesty_humility
+
+# Prompt-level labeling (tune for your score scales; Detoxify toxicity is often small on HH)
+toxicity_improvement_min: 0.0005
+# Jaccard can be noisy at low values; treat as "preserved" if drop <= this vs baseline
+integrity_drop_tolerance: 0.02
+
+# Qualitative report
+examples_per_category: 2
+max_chars_per_field: 450

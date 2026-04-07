@@ -4,6 +4,7 @@ End-to-end HH path: optional generation for all conditions, Detoxify, integrity 
 Example:
   python src/run_hh_tradeoff_pipeline.py --generate   # full run (slow)
   python src/run_hh_tradeoff_pipeline.py              # use existing outputs/hh_*.csv
+  python src/run_hh_tradeoff_pipeline.py --analyze-only
 """
 import argparse
 import os
@@ -26,7 +27,23 @@ def main() -> None:
         default="configs/hh_all_conditions.yaml",
         help="Config for --generate (default: hh_all_conditions.yaml)",
     )
+    parser.add_argument(
+        "--analyze",
+        action="store_true",
+        help="After tradeoff tables, run analyze_detox_integrity.py",
+    )
+    parser.add_argument(
+        "--analyze-only",
+        action="store_true",
+        help="Only run analyze_detox_integrity.py (expects HH integrity+detoxify CSVs)",
+    )
     args = parser.parse_args()
+
+    if args.analyze_only:
+        print("Running detox vs integrity analysis only\n")
+        subprocess.run([sys.executable, "src/analyze_detox_integrity.py"], check=True)
+        print("\nDone. See outputs/detox_integrity_analysis.* and qualitative_examples.md")
+        return
 
     if args.generate:
         print("Step 1: Generation (all HH conditions)\n")
@@ -41,6 +58,10 @@ def main() -> None:
     print("\nStep 4: Tradeoff summary tables\n")
     subprocess.run([sys.executable, "src/build_tradeoff_tables.py"], check=True)
     print("\nDone. See outputs/hh_tradeoff_summary.csv and outputs/hh_tradeoff_summary.md")
+    if args.analyze:
+        print("\nStep 5: Detox vs integrity analysis + qualitative examples\n")
+        subprocess.run([sys.executable, "src/analyze_detox_integrity.py"], check=True)
+        print("\nAlso see outputs/detox_integrity_analysis.* and qualitative_examples.md")
 
 
 if __name__ == "__main__":
