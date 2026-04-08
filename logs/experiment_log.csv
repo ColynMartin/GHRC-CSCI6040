@@ -7,3 +7,4 @@ hh_tradeoff_summary.md,distilgpt2,multi_personality_hh,hh,2026-04-07,Heather Bow
 detox_integrity_analysis.csv,distilgpt2,detox_vs_baseline,hh,2026-04-07,Heather Bowman,"Week 4: aggregate deltas vs baseline per detox_methods in configs/detox_conditions.yaml; analyze_detox_integrity.py. Work log: logs/week4_integrity_qualitative_work_log.md."
 detox_integrity_analysis.md,distilgpt2,detox_vs_baseline,hh,2026-04-07,Heather Bowman,"Week 4: Markdown table mirror of detox_integrity_analysis.csv."
 qualitative_examples.md,distilgpt2,detox_vs_baseline,hh,2026-04-07,Heather Bowman,"Week 4: qualitative win-win / tradeoff / integrity-loss excerpts; analyze_detox_integrity.py. Work log: logs/week4_integrity_qualitative_work_log.md."
+week5_synthesis_presentation_work_log.md,n/a,synthesis_presentation,hh,2026-04-07,Heather Bowman,"Week 5: checklist for final tradeoff + integrity conclusions and presentation; no new pipeline. logs/week5_synthesis_presentation_work_log.md."

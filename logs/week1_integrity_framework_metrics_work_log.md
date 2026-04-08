@@ -78,6 +78,7 @@ Optional for Week 1 folder on **OneDrive** (`week1/analysis/` or `week1/docs/`):
 | Baseline-first HH run | [`logs/week2_hh_baseline_helpfulness_validation_work_log.md`](week2_hh_baseline_helpfulness_validation_work_log.md) |
 | All conditions + tradeoff (Week 3) | [`logs/week3_integrity_all_methods_tradeoff_work_log.md`](week3_integrity_all_methods_tradeoff_work_log.md) |
 | Detox vs baseline + qualitative (Week 4) | [`logs/week4_integrity_qualitative_work_log.md`](week4_integrity_qualitative_work_log.md) |
+| Synthesis + presentation (Week 5) | [`logs/week5_synthesis_presentation_work_log.md`](week5_synthesis_presentation_work_log.md) |
 
 ---
 

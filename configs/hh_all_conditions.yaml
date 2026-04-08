@@ -2,7 +2,7 @@
 model_name: "distilgpt2"
 dataset_file: "data/hh_clean.csv"
 dataset: "HH"
-n_samples: 50
+n_samples: 500
 personality_conditions:
   - "baseline"
   - "high_agreeableness"
@@ -17,7 +17,7 @@ personality_conditions:
   - "low_openness"
   - "high_conscientiousness"
   - "low_conscientiousness"
-max_new_tokens: 50
+max_new_tokens: 500
 batch_size: 1
 seed: 42
 output_dir: "outputs"

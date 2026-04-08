@@ -68,7 +68,7 @@ Together, refusal rate is not “higher is better” globally; it is **calibrate
 
 ## 3. Toxicity vs integrity evaluation framework
 
-**Toxicity axis (existing):** `detoxify_toxicity` on `generated_text` for each HH run file (`*_detoxify.csv`), same as RTP.
+**Toxicity axis (existing):** `detoxify_toxicity` on `generated_text` (same Detoxify model as RTP). It is stored in `*_integrity.csv` when using `score_integrity_hh.py`, and may also appear in `*_detoxify.csv` from `score_detoxify.py`.
 
 **Integrity axis (new):** For each condition and prompt, compute one or more of: similarity-to-reference (helpfulness), refusal flags, consistency indices.
 
@@ -88,7 +88,7 @@ Together, refusal rate is not “higher is better” globally; it is **calibrate
 |------|------------|
 | Config | Set `dataset_file` to `data/hh_clean.csv`, `dataset` to `HH`, tune `n_samples` for runtime. |
 | Cleaning | `clean_datasets.py` writes `reference_reply` for HH; re-run it after updating `hh_full.csv`. |
-| Scoring | `src/score_integrity_hh.py` joins generations with `hh_clean.csv`, adds `helpfulness_token_jaccard` and `refusal_rule_based`, writes `outputs/<stem>_integrity.csv`, and prints validation. Batch all conditions: `src/run_integrity_all_hh.py`. Baseline-only orchestration: `src/run_hh_baseline_eval.py`. |
+| Scoring | `src/score_integrity_hh.py` joins generations with `hh_clean.csv`, adds `helpfulness_token_jaccard`, `refusal_rule_based`, and **`detoxify_toxicity`** (Detoxify), writes `outputs/<stem>_integrity.csv`, and prints validation. Batch all conditions: `src/run_integrity_all_hh.py`. Baseline-only orchestration: `src/run_hh_baseline_eval.py`. |
 | Tradeoff | `src/build_tradeoff_tables.py` aggregates `mean_detoxify_toxicity` with helpfulness/refusal per condition → `outputs/hh_tradeoff_summary.csv` / `.md`. Full HH path: `src/run_hh_tradeoff_pipeline.py` (`configs/hh_all_conditions.yaml`). |
 | Detox vs integrity | `src/analyze_detox_integrity.py` + `configs/detox_conditions.yaml` → `outputs/detox_integrity_analysis.csv` / `.md`, `outputs/qualitative_examples.md`. Guide: `docs/detox_integrity_analysis_guide.md`. |
 | Dependencies | Embeddings need a model dependency if not already present; refusal rules can start with regex/keyword to avoid extra packages. |

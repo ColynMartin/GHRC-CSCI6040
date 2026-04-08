@@ -97,3 +97,4 @@ python src/build_tradeoff_tables.py
 
 - [`docs/integrity_evaluation_plan.md`](../docs/integrity_evaluation_plan.md) — metric definitions and framework.
 - [`logs/week4_integrity_qualitative_work_log.md`](week4_integrity_qualitative_work_log.md) — **Week 4** downstream **detox vs baseline** analysis and qualitative examples (separate README section).
+- [`logs/week5_synthesis_presentation_work_log.md`](week5_synthesis_presentation_work_log.md) — **Week 5** synthesis and presentation after Week 4.

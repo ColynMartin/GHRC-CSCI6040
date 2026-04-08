@@ -43,7 +43,7 @@ This command will:
 2. Score toxicity using Detoxify
 3. Save results to the `outputs/` folder
 
-### HH baseline: helpfulness before Detoxify
+### HH baseline: helpfulness + Detoxify toxicity (same table)
 
 After `data/hh_clean.csv` exists (with `reference_reply`; see `src/clean_datasets.py`):
 
@@ -51,7 +51,7 @@ After `data/hh_clean.csv` exists (with `reference_reply`; see `src/clean_dataset
 python src/run_hh_baseline_eval.py
 ```
 
-This runs generation from `configs/hh_baseline.yaml` (HH, baseline only by default), then `src/score_integrity_hh.py` for each condition, writing e.g. `outputs/hh_baseline_integrity.csv` and printing **metric validation** (coverage, score ranges, refusal rate). Run `python src/score_detoxify.py` afterward when you want toxicity on the raw generation files (integrity CSVs are skipped by Detoxify to avoid duplicate scoring).
+This runs generation from `configs/hh_baseline.yaml` (HH, baseline only by default), then `src/score_integrity_hh.py` for each condition. **`outputs/hh_baseline_integrity.csv`** includes **`helpfulness_token_jaccard`**, **`refusal_rule_based`**, and **`detoxify_toxicity`** (Detoxify `original` on each `generated_text`) in one file, plus **metric validation** in the terminal. Optionally run `python src/score_detoxify.py hh_` if you also want standalone `hh_*_detoxify.csv` files (e.g. for older scripts); integrity CSVs are skipped by that script.
 
 **Week 2 work log** (baseline run, helpfulness before detox, validating metrics): [`logs/week2_hh_baseline_helpfulness_validation_work_log.md`](logs/week2_hh_baseline_helpfulness_validation_work_log.md).
 
@@ -86,6 +86,12 @@ This writes **`outputs/detox_integrity_analysis.csv`** / **`.md`** (aggregate Δ
 - `python src/run_hh_tradeoff_pipeline.py --analyze-only` — runs **only** `analyze_detox_integrity.py` (expects per-condition integrity + Detoxify CSVs already on disk).
 
 ⚠️ **Note:** All important experiment outputs should be uploaded to the shared OneDrive folder (see Data Storage section below).
+
+### Week 5: Synthesis and presentation (integrity / tradeoffs)
+
+**Goal:** Final analyses; communicate **toxicity vs helpfulness (integrity)** tradeoffs; state **final integrity conclusions** for the report or slides.
+
+**Work log:** [`logs/week5_synthesis_presentation_work_log.md`](logs/week5_synthesis_presentation_work_log.md) — prerequisites (Weeks 1–4), figure and narrative checklist, primary artifacts to cite, OneDrive `week5/` guidance.
 
 ---
 
@@ -386,9 +392,13 @@ git pull origin main
 
 **Week 1 work log** (define helpfulness retention, refusal rate, semantic consistency; plan toxicity vs integrity framework): [`logs/week1_integrity_framework_metrics_work_log.md`](logs/week1_integrity_framework_metrics_work_log.md).
 
+**Week 2 work log** (HH baseline, helpfulness before detox, metric validation): [`logs/week2_hh_baseline_helpfulness_validation_work_log.md`](logs/week2_hh_baseline_helpfulness_validation_work_log.md).
+
 **Week 3 work log** (integrity across all methods + tradeoff tables): [`logs/week3_integrity_all_methods_tradeoff_work_log.md`](logs/week3_integrity_all_methods_tradeoff_work_log.md).
 
 **Week 4 work log** (detox vs integrity analysis + qualitative examples): [`logs/week4_integrity_qualitative_work_log.md`](logs/week4_integrity_qualitative_work_log.md).
+
+**Week 5 work log** (synthesis and presentation: tradeoff communication, final integrity conclusions): [`logs/week5_synthesis_presentation_work_log.md`](logs/week5_synthesis_presentation_work_log.md).
 
 ---
 

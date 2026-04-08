@@ -109,3 +109,9 @@ See `docs/detox_integrity_analysis_guide.md` and `docs/integrity_evaluation_plan
 - [ ] `outputs/detox_integrity_analysis.csv` / `.md`  
 - [ ] `outputs/qualitative_examples.md`  
 - [ ] `configs/detox_conditions.yaml` (and related HH configs) copied or referenced in OneDrive **`week4/configs/`**  
+
+---
+
+## 7. Next step
+
+- **Week 5 — synthesis and presentation:** [`week5_synthesis_presentation_work_log.md`](week5_synthesis_presentation_work_log.md) (final tradeoff communication and integrity conclusions).

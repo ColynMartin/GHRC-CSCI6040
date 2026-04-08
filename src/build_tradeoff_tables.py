@@ -54,25 +54,29 @@ def main() -> None:
         if "helpfulness_token_jaccard" not in int_df.columns:
             continue
 
-        tox_path = os.path.join(OUTPUTS, f"hh_{cond}_detoxify.csv")
-        if os.path.isfile(tox_path):
-            tox_df = pd.read_csv(tox_path)
-            if "detoxify_toxicity" not in tox_df.columns:
+        if "detoxify_toxicity" in int_df.columns:
+            mean_tox = int_df["detoxify_toxicity"].mean()
+            merged_n = len(int_df)
+        else:
+            tox_path = os.path.join(OUTPUTS, f"hh_{cond}_detoxify.csv")
+            if os.path.isfile(tox_path):
+                tox_df = pd.read_csv(tox_path)
+                if "detoxify_toxicity" not in tox_df.columns:
+                    missing_tox.append(cond)
+                    mean_tox = float("nan")
+                    merged_n = len(int_df)
+                else:
+                    m = int_df.merge(
+                        tox_df[["prompt_id", "detoxify_toxicity"]],
+                        on="prompt_id",
+                        how="left",
+                    )
+                    mean_tox = m["detoxify_toxicity"].mean()
+                    merged_n = len(m)
+            else:
                 missing_tox.append(cond)
                 mean_tox = float("nan")
                 merged_n = len(int_df)
-            else:
-                m = int_df.merge(
-                    tox_df[["prompt_id", "detoxify_toxicity"]],
-                    on="prompt_id",
-                    how="left",
-                )
-                mean_tox = m["detoxify_toxicity"].mean()
-                merged_n = len(m)
-        else:
-            missing_tox.append(cond)
-            mean_tox = float("nan")
-            merged_n = len(int_df)
 
         refusal = int_df["refusal_rule_based"].astype(bool) if "refusal_rule_based" in int_df.columns else pd.Series([float("nan")] * len(int_df))
 

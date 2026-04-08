@@ -2,7 +2,9 @@
 Compare baseline HH runs to configured "detox" personality conditions:
 quantitative integrity/toxicity deltas and qualitative example export.
 
-Inputs: outputs/hh_<condition>_integrity.csv + hh_<condition>_detoxify.csv
+Inputs: outputs/hh_<condition>_integrity.csv (with `detoxify_toxicity` when produced by
+score_integrity_hh.py), or legacy merge from hh_<condition>_detoxify.csv if toxicity
+is only in the Detoxify file.
 Config: configs/detox_conditions.yaml
 Outputs: outputs/detox_integrity_analysis.csv, .md, outputs/qualitative_examples.md
 """
@@ -57,15 +59,18 @@ def dataframe_to_markdown_table(df: pd.DataFrame) -> str:
 
 def load_integrity_plus_tox(condition: str) -> pd.DataFrame | None:
     ip = OUTPUTS / f"hh_{condition}_integrity.csv"
-    tp = OUTPUTS / f"hh_{condition}_detoxify.csv"
-    if not ip.is_file() or not tp.is_file():
+    if not ip.is_file():
         return None
     i = pd.read_csv(ip)
+    if "detoxify_toxicity" in i.columns:
+        return i
+    tp = OUTPUTS / f"hh_{condition}_detoxify.csv"
+    if not tp.is_file():
+        return None
     t = pd.read_csv(tp)
     if "detoxify_toxicity" not in t.columns:
         return None
-    m = i.merge(t[["prompt_id", "detoxify_toxicity"]], on="prompt_id", how="inner")
-    return m
+    return i.merge(t[["prompt_id", "detoxify_toxicity"]], on="prompt_id", how="inner")
 
 
 def compare_to_baseline(

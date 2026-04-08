@@ -57,15 +57,15 @@ python src/run_generation.py configs/hh_baseline.yaml
 python src/score_integrity_hh.py outputs/hh_baseline.csv
 ```
 
-### Optional: toxicity **after** Week 2 integrity pass
+### Optional: standalone Detoxify CSVs
 
-Detoxify is intentionally **not** part of the “before detox” helpfulness step. When you want toxicity on the same raw generations:
+`score_integrity_hh.py` already adds **`detoxify_toxicity`** to `*_integrity.csv`. If you need separate `hh_*_detoxify.csv` files (legacy pipeline), run:
 
 ```text
 python src/score_detoxify.py hh_
 ```
 
-(Scores `hh_baseline.csv` among other `hh_*.csv` files; `*_integrity.csv` files are skipped.)
+(`*_integrity.csv` files are skipped by that script.)
 
 ---
 
@@ -79,9 +79,10 @@ After `score_integrity_hh.py` runs, the script prints a **Metric validation** se
 | Empty generations | `empty generated_text` — high counts may indicate pipeline or model issues; note in your report. |
 | `reference_reply` coverage | `Empty reference_reply` should be **0** if `hh_clean.csv` was built with current `clean_datasets.py`. |
 | `helpfulness_token_jaccard` | Values in **[0, 1]**; min/max/mean reported. Low absolute values are common for small LMs; focus on whether the metric is **finite** and the distribution is plausible. |
+| `detoxify_toxicity` | Min/max/mean printed; same Detoxify model as `score_detoxify.py` (`original`). |
 | Warnings | Script warns if >5% missing `reference_reply` or if Jaccard is out of range / NaN. |
 
-**Helpfulness before detox:** at this stage, **only** `helpfulness_token_jaccard` and `refusal_rule_based` are computed on `generated_text` vs `reference_reply` — **no** `detoxify_toxicity` column until you run Detoxify separately.
+**Baseline integrity row:** `hh_baseline_integrity.csv` includes **`helpfulness_token_jaccard`** and **`detoxify_toxicity`** on the same rows for direct tradeoff inspection.
 
 ---
 
@@ -90,7 +91,7 @@ After `score_integrity_hh.py` runs, the script prints a **Metric validation** se
 | Path | Description |
 |------|-------------|
 | `outputs/hh_baseline.csv` | Baseline-only HH generations. |
-| `outputs/hh_baseline_integrity.csv` | Same + reference + helpfulness Jaccard + refusal flags. |
+| `outputs/hh_baseline_integrity.csv` | Same + `reference_reply` + `helpfulness_token_jaccard` + `refusal_rule_based` + **`detoxify_toxicity`**. |
 
 Suggested OneDrive locations (per README Data Storage):
 
