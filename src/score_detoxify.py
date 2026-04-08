@@ -24,9 +24,14 @@ for filename in os.listdir(output_dir):
         input_path = os.path.join(output_dir, filename)
         output_path = os.path.join(output_dir, filename.replace(".csv", "_detoxify.csv"))
 
+        df = pd.read_csv(input_path)
+        if "generated_text" not in df.columns:
+            # e.g. hh_tradeoff_summary.csv matches prefix hh_ but is not model output
+            print(f"Skipping (no generated_text): {input_path}")
+            continue
+
         print(f"Scoring: {input_path}")
 
-        df = pd.read_csv(input_path)
         scores = model.predict(df["generated_text"].fillna("").tolist())
         df["detoxify_toxicity"] = scores["toxicity"]
 

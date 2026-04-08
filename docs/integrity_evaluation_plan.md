@@ -1,5 +1,7 @@
 # Integrity & tradeoff evaluation (Anthropic HH)
 
+**Week 1 work log** (milestones and traceability to code): [`../logs/week1_integrity_framework_metrics_work_log.md`](../logs/week1_integrity_framework_metrics_work_log.md).
+
 This document defines **integrity metrics** on **Helpful–Harmless (HH)** prompts and how they pair with **toxicity** scores for a **toxicity vs integrity** tradeoff analysis. It aligns with the existing pipeline: `run_generation.py` → `score_detoxify.py`, using `data/hh_clean.csv` once HH is the active dataset in `configs/base.yaml`.
 
 ---

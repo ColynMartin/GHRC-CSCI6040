@@ -53,6 +53,8 @@ python src/run_hh_baseline_eval.py
 
 This runs generation from `configs/hh_baseline.yaml` (HH, baseline only by default), then `src/score_integrity_hh.py` for each condition, writing e.g. `outputs/hh_baseline_integrity.csv` and printing **metric validation** (coverage, score ranges, refusal rate). Run `python src/score_detoxify.py` afterward when you want toxicity on the raw generation files (integrity CSVs are skipped by Detoxify to avoid duplicate scoring).
 
+**Week 2 work log** (baseline run, helpfulness before detox, validating metrics): [`logs/week2_hh_baseline_helpfulness_validation_work_log.md`](logs/week2_hh_baseline_helpfulness_validation_work_log.md).
+
 ### HH: integrity across all methods + toxicity vs helpfulness tables
 
 1. Generate for **every** personality condition using `configs/hh_all_conditions.yaml` (or use the bundled pipeline below).
@@ -66,6 +68,8 @@ One-shot (add `--generate` to include the slow generation step):
 python src/run_hh_tradeoff_pipeline.py --generate
 ```
 
+**Week 3 work log** (integrity across all methods + tradeoff tables): [`logs/week3_integrity_all_methods_tradeoff_work_log.md`](logs/week3_integrity_all_methods_tradeoff_work_log.md). Log rows for summary artifacts: [`logs/experiment_log.csv`](logs/experiment_log.csv).
+
 ### HH: detox methods vs integrity + qualitative examples
 
 After per-condition `hh_*_integrity.csv` and `hh_*_detoxify.csv` exist, edit **`configs/detox_conditions.yaml`** (which personality runs count as “detox” vs `baseline`), then:
@@ -76,7 +80,10 @@ python src/analyze_detox_integrity.py
 
 This writes **`outputs/detox_integrity_analysis.csv`** / **`.md`** (aggregate Δ helpfulness Jaccard, Δ toxicity, tradeoff vs win–win rates) and **`outputs/qualitative_examples.md`** (side-by-side prompts, reference, baseline vs condition generations). Interpretation notes: [`docs/detox_integrity_analysis_guide.md`](docs/detox_integrity_analysis_guide.md).
 
-Optional: `python src/run_hh_tradeoff_pipeline.py --analyze` runs only the analyzer (expects outputs already present).
+**Week 4 work log** (detox vs integrity + qualitative examples — commands, configs, artifacts, OneDrive checklist): [`logs/week4_integrity_qualitative_work_log.md`](logs/week4_integrity_qualitative_work_log.md). **Experiment log rows** for this stream: [`logs/experiment_log.csv`](logs/experiment_log.csv).
+
+- `python src/run_hh_tradeoff_pipeline.py --analyze` — reruns Detoxify (HH prefix), integrity-all, tradeoff tables, then `analyze_detox_integrity.py`.
+- `python src/run_hh_tradeoff_pipeline.py --analyze-only` — runs **only** `analyze_detox_integrity.py` (expects per-condition integrity + Detoxify CSVs already on disk).
 
 ⚠️ **Note:** All important experiment outputs should be uploaded to the shared OneDrive folder (see Data Storage section below).
 
@@ -376,6 +383,12 @@ git pull origin main
 | Heather Bowman | Hypothesis 3 – integrity vs helpfulness |
 
 **Integrity / tradeoff evaluation (HH):** metric definitions, subsets, and toxicity-vs-integrity reporting are in [`docs/integrity_evaluation_plan.md`](docs/integrity_evaluation_plan.md).
+
+**Week 1 work log** (define helpfulness retention, refusal rate, semantic consistency; plan toxicity vs integrity framework): [`logs/week1_integrity_framework_metrics_work_log.md`](logs/week1_integrity_framework_metrics_work_log.md).
+
+**Week 3 work log** (integrity across all methods + tradeoff tables): [`logs/week3_integrity_all_methods_tradeoff_work_log.md`](logs/week3_integrity_all_methods_tradeoff_work_log.md).
+
+**Week 4 work log** (detox vs integrity analysis + qualitative examples): [`logs/week4_integrity_qualitative_work_log.md`](logs/week4_integrity_qualitative_work_log.md).
 
 ---
 
