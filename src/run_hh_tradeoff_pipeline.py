@@ -57,9 +57,14 @@ def main() -> None:
     subprocess.run([sys.executable, "src/run_integrity_all_hh.py"], check=True)
     print("\nStep 4: Tradeoff summary tables\n")
     subprocess.run([sys.executable, "src/build_tradeoff_tables.py"], check=True)
-    print("\nDone. See outputs/hh_tradeoff_summary.csv and outputs/hh_tradeoff_summary.md")
+    print("\nStep 5: Presentation tradeoff figure + slide bullets\n")
+    subprocess.run([sys.executable, "src/plot_hh_tradeoff.py"], check=True)
+    print(
+        "\nDone. See outputs/hh_tradeoff_summary.csv, outputs/hh_tradeoff_summary.md, "
+        "outputs/hh_tradeoff_scatter.png, outputs/presentation_tradeoff_findings.txt"
+    )
     if args.analyze:
-        print("\nStep 5: Detox vs integrity analysis + qualitative examples\n")
+        print("\nStep 6: Detox vs integrity analysis + qualitative examples\n")
         subprocess.run([sys.executable, "src/analyze_detox_integrity.py"], check=True)
         print("\nAlso see outputs/detox_integrity_analysis.* and qualitative_examples.md")
 

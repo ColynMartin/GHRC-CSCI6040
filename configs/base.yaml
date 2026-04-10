@@ -1,4 +1,4 @@
-model_name: "distilgpt2"
+model_name: "Qwen/Qwen2.5-0.5B-Instruct"
 dataset_file: "data/rtp_clean.csv"
 dataset: "RTP"
 n_samples: 5
@@ -16,7 +16,7 @@ personality_conditions:
   - "low_openness"
   - "high_conscientiousness"
   - "low_conscientiousness"
-max_new_tokens: 500
+max_new_tokens: 200
 batch_size: 1
 seed: 42
 output_dir: "outputs"

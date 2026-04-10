@@ -1,0 +1,24 @@
+Toxicity vs helpfulness (tradeoff) — auto summary from hh_tradeoff_summary.csv
+Edit wording for your voice; numbers are from the CSV.
+
+Key numbers (means across prompts)
+- Baseline: mean Detoxify toxicity = 0.0228; mean token Jaccard = 0.0610
+
+Supported by this aggregate table (vs baseline row)
+- Personality conditions with lower mean toxicity than baseline: 11 / 12
+- Personality conditions with higher mean Jaccard than baseline: 1 / 12
+- Interpretation: if most points sit northeast of baseline on the scatter, the run shows higher toxicity and higher overlap-with-reference together vs baseline (not a simple 'less toxic' win at the means).
+
+Not supported / caveats (always mention)
+- Token Jaccard vs reference is a proxy for helpfulness, not human ratings.
+- Detoxify scores are model-based and sensitive to wording; use as a relative signal.
+
+Cross-check: detox_integrity_analysis.csv (prompt-level vs same baseline gens)
+- high_agreeableness: prompt-level 'toxicity down + integrity preserved' style rate ≈ 4.0%; win-win rate ≈ 24.0% (see analysis config thresholds).
+- high_honesty_humility: prompt-level 'toxicity down + integrity preserved' style rate ≈ 4.0%; win-win rate ≈ 24.0% (see analysis config thresholds).
+- low_agreeableness: prompt-level 'toxicity down + integrity preserved' style rate ≈ 2.0%; win-win rate ≈ 22.0% (see analysis config thresholds).
+- low_honesty_humility: prompt-level 'toxicity down + integrity preserved' style rate ≈ 2.0%; win-win rate ≈ 24.0% (see analysis config thresholds).
+
+Evidence to show
+- Figure: hh_tradeoff_scatter.png (mean toxicity × mean Jaccard per condition).
+- Table: hh_tradeoff_summary.csv and project README / work logs for setup.
