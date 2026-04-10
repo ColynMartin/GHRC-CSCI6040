@@ -16,7 +16,7 @@ personality_conditions:
   - "low_openness"
   - "high_conscientiousness"
   - "low_conscientiousness"
-max_new_tokens: 50
+max_new_tokens: 500
 batch_size: 1
 seed: 42
 output_dir: "outputs"
