@@ -1,0 +1,65 @@
+project:
+  name: llm_personality_detoxification
+  seed: 42
+  output_dir: outputs
+
+data:
+  files:
+    rtp: data/rtp_clean.csv
+    hh: data/hh_clean.csv
+  prompt_column_candidates:
+    - prompt
+    - text
+    - input
+    - prompt_text
+    - content
+    - chosen
+  max_samples_per_dataset: 100
+  shuffle: true
+
+model:
+  model_name: distilgpt2
+  device: auto
+  torch_dtype: auto
+  max_new_tokens: 64
+  temperature: 0.8
+  top_p: 0.95
+  do_sample: true
+  repetition_penalty: 1.05
+  use_fp16_if_available: true
+
+generation:
+  methods:
+    - baseline
+    - sequence_penalty
+    - token_penalty
+  num_candidates_sequence_penalty: 4
+  sequence_penalty_strength: 1.0
+  token_penalty_strength: 2.0
+  toxic_token_lexicon_path: configs/toxic_lexicon.txt
+  bad_words_blocklist_only: false
+  toxic_threshold: 0.5
+  batch_size: 8
+
+personality:
+  enabled: true
+  include_conditions:
+    - neutral
+    - high_agreeableness
+    - low_agreeableness
+    - high_honesty_humility
+    - low_honesty_humility
+    - high_conscientiousness
+    - low_conscientiousness
+
+scoring:
+  use_detoxify: true
+  detoxify_model: original
+  use_llama_guard: false
+  llama_guard_model_name: meta-llama/Llama-Guard-3-8B
+  compute_integrity_metrics: true
+
+logging:
+  save_raw_generations: true
+  save_summary_csv: true
+  save_summary_txt: true

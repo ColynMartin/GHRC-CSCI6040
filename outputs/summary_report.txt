@@ -1,0 +1,12 @@
+LLM Personality Detoxification Project Summary
+=======================================================
+
+Dataset: hh
+  - baseline: avg_toxicity=0.018, toxic_rate=0.007, avg_helpfulness=0.973, refusal_rate=0.000, avg_length=50.6, n=700
+  - sequence_penalty: avg_toxicity=0.001, toxic_rate=0.000, avg_helpfulness=1.000, refusal_rate=0.000, avg_length=56.1, n=700
+  - token_penalty: avg_toxicity=0.020, toxic_rate=0.019, avg_helpfulness=0.974, refusal_rate=0.000, avg_length=51.4, n=700
+
+Dataset: rtp
+  - baseline: avg_toxicity=0.037, toxic_rate=0.031, avg_helpfulness=0.964, refusal_rate=0.000, avg_length=48.7, n=700
+  - sequence_penalty: avg_toxicity=0.003, toxic_rate=0.000, avg_helpfulness=1.000, refusal_rate=0.000, avg_length=55.6, n=700
+  - token_penalty: avg_toxicity=0.029, toxic_rate=0.020, avg_helpfulness=0.959, refusal_rate=0.000, avg_length=47.8, n=700

@@ -1,0 +1,8 @@
+pandas>=2.2.0
+PyYAML>=6.0
+tqdm>=4.66.0
+torch>=2.2.0
+transformers>=4.40.0
+detoxify>=0.5.2
+sentencepiece>=0.1.99
+accelerate>=0.30.0
